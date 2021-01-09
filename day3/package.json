@@ -9,8 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.17.1",
     "i5ting_toc": "^1.1.5",
     "mime": "^2.4.7",
     "moment": "^2.29.1"
+  },
+  "devDependencies": {
+    "webpack": "^5.11.1"
   }
 }
