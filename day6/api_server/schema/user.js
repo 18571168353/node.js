@@ -21,6 +21,9 @@ const password = joi
 const id = joi.number().integer().min(1).required()
 const nickname = joi.string().required()
 const email = joi.string().email().required()
+// dataUri() 指的是如下格式的字符串数据：
+// data:image/png;base64,VE9PTUFOWVNFQ1JFVFM=
+const avatar = joi.string().dataUri().required()
 
 
 
@@ -51,4 +54,11 @@ exports.update_password_schema = {
     newPwd: joi.not(joi.ref('oldPwd')).concat(password),
   },
 }
+// 验证规则对象 - 更新头像
+exports.update_avatar_schema = {
+  body: {
+    avatar,
+  },
+}
+
 
