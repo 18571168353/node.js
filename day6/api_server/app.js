@@ -10,6 +10,9 @@ const cors = require('cors')
 app.use(cors())
 app.use(express.urlencoded({ extended: false }))
 
+// 托管静态资源文件
+app.use('/uploads', express.static('./uploads'))
+
 // 响应数据的中间件
 app.use(function (req, res, next) {
 	// status = 0 为成功； status = 1 为失败； 默认将 status 的值设置为 1，方便处理失败的情况
@@ -45,6 +48,11 @@ const artCateRouter = require('./router/artcate')
 // 为文章分类的路由挂载统一的访问前缀 /my/article
 app.use('/my/article', artCateRouter)
 
+// 导入并使用文章路由模块
+const articleRouter = require('./router/article')
+// 为文章的路由挂载统一的访问前缀 /my/article
+app.use('/my/article', articleRouter)
+
 // 注意：以 /my 开头的接口，都是有权限的接口，需要进行 Token 身份认证
 app.use('/my', userinfoRouter)
 
@@ -61,7 +69,4 @@ app.use(function (err, req, res, next) {
 // 调用 app.listen 方法，指定端口号并启动web服务器
 app.listen(3007, function () {
 	console.log('api server running at http://127.0.0.1:3007')
-	// console.log('api server running at http://192.168.88.148:3007')
-
 })
-
